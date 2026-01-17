@@ -1,0 +1,23 @@
+{
+	"name": "theme-justpromptbro",
+	"displayName": "JustPromptBro Theme",
+	"description": "The official JustPromptBro theme - Black and Green",
+	"version": "1.0.0",
+	"publisher": "justpromptbro",
+	"license": "MIT",
+	"engines": {
+		"vscode": "*"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "JustPromptBro",
+				"uiTheme": "vs-dark",
+				"path": "./themes/justpromptbro-color-theme.json"
+			}
+		]
+	}
+}

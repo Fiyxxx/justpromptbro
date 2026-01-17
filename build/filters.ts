@@ -39,11 +39,15 @@ export const unicodeFilter = Object.freeze<string[]>([
 	'!LICENSES.chromium.html',
 	'!**/LICENSE',
 
-	'!**/*.{dll,exe,png,bmp,jpg,scpt,cur,ttf,woff,eot,template,ico,icns,opus,wasm}',
+	'!**/*.{dll,exe,png,bmp,jpg,scpt,cur,ttf,woff,woff2,eot,template,ico,icns,opus,wasm,mp4}',
 	'!**/test/**',
 	'!**/*.test.ts',
 	'!**/*.{d.ts,json,md}',
 	'!**/*.mp3',
+	'!**/media/videos/**',
+	'!**/media/encouragement/**',
+	'!**/media/audio/**',
+	'!extensions/kilo-code/**',
 
 	'!build/win32/**',
 	'!extensions/markdown-language-features/notebook-out/*.js',
@@ -128,7 +132,11 @@ export const indentationFilter = Object.freeze<string[]>([
 	'!src/vs/*/**/*.d.ts',
 	'!src/typings/**/*.d.ts',
 	'!extensions/**/*.d.ts',
-	'!**/*.{svg,exe,png,bmp,jpg,scpt,bat,cmd,cur,ttf,woff,eot,md,ps1,psm1,template,yaml,yml,d.ts.recipe,ico,icns,plist,opus,admx,adml,wasm}',
+	'!**/*.{svg,exe,png,bmp,jpg,scpt,bat,cmd,cur,ttf,woff,woff2,eot,md,ps1,psm1,template,yaml,yml,d.ts.recipe,ico,icns,plist,opus,admx,adml,wasm,mp4}',
+	'!**/media/videos/**',
+	'!**/media/encouragement/**',
+	'!**/media/audio/**',
+	'!extensions/kilo-code/**',
 	'!build/{lib,download,linux,darwin}/**/*.js',
 	'!build/**/*.sh',
 	'!build/azure-pipelines/**/*.js',
@@ -173,6 +181,7 @@ export const copyrightFilter = Object.freeze<string[]>([
 	'!**/*.code-workspace',
 	'!**/*.js.map',
 	'!**/*.wasm',
+	'!extensions/kilo-code/**',
 	'!build/**/*.init',
 	'!build/linux/libcxx-fetcher.*',
 	'!build/npm/gyp/custom-headers/*.patch',
@@ -208,6 +217,7 @@ export const tsFormattingFilter = Object.freeze<string[]>([
 	'!extensions/html-language-features/server/lib/jquery.d.ts',
 	'!extensions/terminal-suggest/src/shell/zshBuiltinsCache.ts',
 	'!extensions/terminal-suggest/src/shell/fishBuiltinsCache.ts',
+	'!extensions/kilo-code/**',
 ]);
 
 export const eslintFilter = Object.freeze<string[]>([

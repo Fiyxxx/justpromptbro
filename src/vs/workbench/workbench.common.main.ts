@@ -407,6 +407,9 @@ import './contrib/list/browser/list.contribution.js';
 // Accessibility Signals
 import './contrib/accessibilitySignals/browser/accessibilitySignal.contribution.js';
 
+// JustPromptBro - The AI-First IDE
+import './contrib/justpromptbro/browser/justpromptbro.contribution.js';
+
 // Bracket Pair Colorizer 2 Telemetry
 import './contrib/bracketPairColorizer2Telemetry/browser/bracketPairColorizer2Telemetry.contribution.js';
 
