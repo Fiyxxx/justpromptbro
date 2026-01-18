@@ -22,7 +22,7 @@ import { mainWindow } from '../../../../base/browser/window.js';
  *
  * When users type in the AI chat (Kilo Code):
  * - All video popups instantly vanish
- * - Encouragement video plays, then serene music starts
+ * - Serene music starts playing
  */
 class JustPromptBroContribution extends Disposable implements IWorkbenchContribution {
 
@@ -46,6 +46,8 @@ class JustPromptBroContribution extends Disposable implements IWorkbenchContribu
 		// Wire up chaos events
 		this._register(this._chaosController.onSpawnPopup(() => {
 			this._videoController.spawnPopup();
+			// Mark that a meme video was played so encouragement video shows on serenity
+			this._serenityController.onMemeVideoPlayed();
 		}));
 
 		this._register(this._chaosController.onEnterSerenity(() => {
@@ -109,11 +111,17 @@ class JustPromptBroContribution extends Disposable implements IWorkbenchContribu
 			console.log('JustPromptBro: Focus - sidebar:', inSidebar, 'excluded:', inExcluded);
 
 			if (inExcluded) {
+				// Focused on editor/terminal - exit serenity mode and enable chaos
+				console.log('JustPromptBro: Editor/terminal focused - EXITING SERENITY MODE!');
+				this._chaosController.setChaosEnabled(true);
+				this._chaosController.onLeaveSidebar();
 				return;
 			}
 
 			if (inSidebar) {
+				// Disable chaos when sidebar is focused (prevents memes during AI code generation)
 				console.log('JustPromptBro: Sidebar focused - ENTERING SERENITY MODE!');
+				this._chaosController.setChaosEnabled(false);
 				this._chaosController.onAIInputTyping();
 			}
 		};
@@ -141,12 +149,14 @@ class JustPromptBroContribution extends Disposable implements IWorkbenchContribu
 			if (!inExcluded && (inSidebar || webviewInSidebar)) {
 				if (!wasInSidebar) {
 					console.log('JustPromptBro: Poll detected sidebar focus - ENTERING SERENITY MODE!');
+					this._chaosController.setChaosEnabled(false);
 					this._chaosController.onAIInputTyping();
 					wasInSidebar = true;
 				}
 			} else {
 				if (wasInSidebar) {
 					console.log('JustPromptBro: Poll detected leaving sidebar - EXITING SERENITY MODE!');
+					this._chaosController.setChaosEnabled(true);
 					this._chaosController.onLeaveSidebar();
 				}
 				wasInSidebar = false;

@@ -31,8 +31,21 @@ export class ChaosController extends Disposable {
 		isSerenityMode: false,
 	};
 
+	/** When false, chaos is disabled (e.g., when sidebar is focused and AI is generating code) */
+	private _chaosEnabled: boolean = true;
+
 	constructor() {
 		super();
+	}
+
+	/**
+	 * Enable or disable chaos mode.
+	 * When disabled, editor keystrokes won't spawn memes.
+	 * Used to prevent memes when AI is generating code in the editor.
+	 */
+	setChaosEnabled(enabled: boolean): void {
+		this._chaosEnabled = enabled;
+		console.log('JustPromptBro ChaosController: Chaos enabled:', enabled);
 	}
 
 	/**
@@ -41,6 +54,11 @@ export class ChaosController extends Disposable {
 	 * @param characterCount Number of characters typed (for paste events, this can be > 1)
 	 */
 	onEditorKeystroke(characterCount: number = 1): IKeystrokeResult {
+		// If chaos is disabled (sidebar focused), ignore keystrokes entirely
+		if (!this._chaosEnabled) {
+			return { shouldSpawnPopup: false, popupCount: this._state.activePopupCount };
+		}
+
 		// Exit serenity mode if we were in it
 		if (this._state.isSerenityMode) {
 			this._exitSerenityMode();
